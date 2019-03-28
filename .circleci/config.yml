@@ -1,0 +1,17 @@
+version: 2.1
+
+orbs:
+  orb-tools: circleci/orb-tools@8.4.0
+  docker-publish: upenn-libraries/docker-publish@dev:alpha
+
+workflows:
+  test_and_publish:
+    jobs:
+      - orb-tools/lint
+      - orb-tools/pack:
+          requires:
+            - orb-tools/lint
+      - orb-tools/publish-dev:
+          orb-name: upenn-libraries/docker-publish
+          requires:
+            - orb-tools/pack
