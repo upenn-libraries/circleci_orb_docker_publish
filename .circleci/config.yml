@@ -11,7 +11,15 @@ workflows:
       - orb-tools/pack:
           requires:
             - orb-tools/lint
+      - orb-tools/test-in-builds:
+          attach-workspace: true
+          orb-name: docker-publish
+          test-steps:
+            - orb-tools/local-test-build:
+                test-config-location: .circleci/test.yml
+          requires:
+            - orb-tools/pack
       - orb-tools/publish-dev:
           orb-name: upenn-libraries/docker-publish
           requires:
-            - orb-tools/pack
+            - orb-tools/test-in-builds

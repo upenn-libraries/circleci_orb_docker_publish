@@ -1,0 +1,11 @@
+version: 2.1
+
+workflows:
+  test:
+    jobs:
+      - docker-publish/publish:
+          name: build
+          dockerfile: .circleci/Dockerfile
+          path: .circleci
+          image: test/test
+          deploy: false
