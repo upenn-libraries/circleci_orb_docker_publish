@@ -4,3 +4,6 @@ description: |
   Build and publish Docker images labeled with build metadata and tagged with
   Git commit hashes. Source:
   https://github.com/upenn-libraries/circleci_orb_docker_publish
+
+orbs:
+  docker-publish: circleci/docker-publish@0.1.6
