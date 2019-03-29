@@ -1,11 +1,18 @@
 version: 2.1
 
+executors:
+  docker:
+    docker:
+      - image: circleci/python:3.6
+        user: root
+
 workflows:
   test:
     jobs:
       - docker-publish/publish:
           name: build
-          dockerfile: .circleci/Dockerfile
-          path: .circleci
-          image: test/test
           deploy: false
+          dockerfile: .circleci/Dockerfile
+          executor: docker
+          image: test/test
+          path: .circleci

@@ -1,8 +1,12 @@
 description: Check, build, and optionally deploy a Docker image.
 
-executor: docker-publish/docker
+executor: << parameters.executor >>
 
 parameters:
+  executor:
+    description: Image to use for running the Docker build. Defaults to docker-publish/docker.
+    type: executor
+    default: docker-publish/docker
   dockerfile:
     description: Name of dockerfile to use. Defaults to Dockerfile.
     type: string
