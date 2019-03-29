@@ -1,0 +1,15 @@
+description: |
+  Build a Docker image without publishing it to a registry.
+
+usage:
+  version: 2.1
+
+  orbs:
+    docker-publish: upenn-libraries/docker-publish@0.1.0
+
+  workflows:
+    build_and_publish_docker_image:
+      jobs:
+        - docker-publish/publish:
+            image: user/myimage
+            deploy: false

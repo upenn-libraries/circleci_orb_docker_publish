@@ -1,0 +1,22 @@
+description: |
+  Build an image with a custom executor. In this example a different user on
+  the container is being used to run the build.
+
+usage:
+  version: 2.1
+
+  orbs:
+    docker-publish: upenn-libraries/docker-publish@0.1.0
+
+  executors:
+    docker_build:
+      docker:
+        - image: circleci/python:3.6
+          user: root
+
+  workflows:
+    build_and_publish_docker_image:
+      jobs:
+        - docker-publish/publish:
+            image: user/myimage
+            executor: docker_build

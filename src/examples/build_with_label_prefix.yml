@@ -1,0 +1,16 @@
+description: |
+  Build and publish an image with the provided prefix for build metadata
+  labels. Reverse DNS notation on a domain you own is recommended.
+
+usage:
+  version: 2.1
+
+  orbs:
+    docker-publish: upenn-libraries/docker-publish@0.1.0
+
+  workflows:
+    build_and_publish_docker_image:
+      jobs:
+        - docker-publish/publish:
+            image: user/myimage
+            label_prefix: com.mydomain

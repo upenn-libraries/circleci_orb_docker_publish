@@ -1,0 +1,16 @@
+description: |
+  Build and publish a Docker image with additional arguments passed to the
+  docker build command.
+
+usage:
+  version: 2.1
+
+  orbs:
+    docker-publish: upenn-libraries/docker-publish@0.1.0
+
+  workflows:
+    build_and_publish_docker_image:
+      jobs:
+        - docker-publish/publish:
+            image: user/myimage
+            extra_build_args: --build-arg ENV=dev
