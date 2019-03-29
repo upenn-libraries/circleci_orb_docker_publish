@@ -2,7 +2,8 @@ version: 2.1
 
 description: |
   Build and publish Docker images labeled with build metadata and tagged with
-  Git commit hashes. Source:
+  Git commit hashes. Based on the official circleci/docker-publish Orb
+  (https://circleci.com/orbs/registry/orb/circleci/docker-publish). Source:
   https://github.com/upenn-libraries/circleci_orb_docker_publish
 
 orbs:
