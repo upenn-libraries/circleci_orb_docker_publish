@@ -33,7 +33,7 @@ parameters:
       https://docs.docker.com/engine/reference/commandline/build
     type: string
     default: ""
-  label-prefix:
+  label_prefix:
     description: Prefix for Docker labels applied to the image. Defaults to $CIRCLE_PROJECT_USERNAME.
     type: string
     default: $CIRCLE_PROJECT_USERNAME
@@ -77,6 +77,7 @@ steps:
       tag: << parameters.tag >>
       registry: << parameters.registry >>
       extra_build_args: << parameters.extra_build_args >>
+      label_prefix: << parameters.label_prefix >>
   - when:
       name: Run after_build lifecycle hook steps.
       condition: << parameters.after_build >>

@@ -27,7 +27,7 @@ parameters:
       https://docs.docker.com/engine/reference/commandline/build
     type: string
     default: ""
-  label-prefix:
+  label_prefix:
     description: Prefix for Docker labels applied to the image. Defaults to $CIRCLE_PROJECT_USERNAME.
     type: string
     default: $CIRCLE_PROJECT_USERNAME
@@ -37,14 +37,16 @@ steps:
       name: Build Docker Image
       command: |
         docker build \
-          --label "<< parameters.label-namespace >>.build-system=circleci" \
-          --label "<< parameters.label-namespace >>.circleci.build-number=${CIRCLE_BUILD_NUM}" \
-          --label "<< parameters.label-namespace >>.circleci.build-timestamp=$(date -uIs)" \
-          --label "<< parameters.label-namespace >>.circleci.build-url=${CIRCLE_BUILD_URL}" \
-          --label "<< parameters.label-namespace >>.circleci.git-branch=${CIRCLE_BRANCH}" \
-          --label "<< parameters.label-namespace >>.circleci.git-commit=${CIRCLE_SHA1}" \
-          --label "<< parameters.label-namespace >>.circleci.git-repo-url=${CIRCLE_REPOSITORY_URL}" \
-          --label "<< parameters.label-namespace >>.circleci.workflow-id=${CIRCLE_WORKFLOW_ID}" \
+          -t << parameters.registry >>/<< parameters.image >>:${CIRCLE_SHA1} \
+          -t << parameters.registry >>/<< parameters.image >>:${CIRCLE_SHA1:0:7} \
+          --label "<< parameters.label_prefix >>.build-system=circleci" \
+          --label "<< parameters.label_prefix >>.circleci.build-number=${CIRCLE_BUILD_NUM}" \
+          --label "<< parameters.label_prefix >>.circleci.build-timestamp=$(date -uIs)" \
+          --label "<< parameters.label_prefix >>.circleci.build-url=${CIRCLE_BUILD_URL}" \
+          --label "<< parameters.label_prefix >>.circleci.git-branch=${CIRCLE_BRANCH}" \
+          --label "<< parameters.label_prefix >>.circleci.git-commit=${CIRCLE_SHA1}" \
+          --label "<< parameters.label_prefix >>.circleci.git-repo-url=${CIRCLE_REPOSITORY_URL}" \
+          --label "<< parameters.label_prefix >>.circleci.workflow-id=${CIRCLE_WORKFLOW_ID}" \
           <<#parameters.extra_build_args>><<parameters.extra_build_args>><</parameters.extra_build_args>> \
           -f << parameters.dockerfile >> -t \
           << parameters.registry >>/<< parameters.image >>:<< parameters.tag >> \
