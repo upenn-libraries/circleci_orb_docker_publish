@@ -33,6 +33,10 @@ parameters:
       https://docs.docker.com/engine/reference/commandline/build
     type: string
     default: ""
+  label-prefix:
+    description: Prefix for Docker labels applied to the image. Defaults to $CIRCLE_PROJECT_USERNAME.
+    type: string
+    default: $CIRCLE_PROJECT_USERNAME
   after_checkout:
     description: Optional steps to run after checking out the code.
     type: steps
@@ -66,7 +70,7 @@ steps:
       name: Run before_build lifecycle hook steps.
       condition: << parameters.before_build >>
       steps: << parameters.before_build >>
-  - docker-publish/build:
+  - build:
       dockerfile: << parameters.dockerfile >>
       path: << parameters.path >>
       image: << parameters.image >>
