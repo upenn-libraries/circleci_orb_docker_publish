@@ -7,4 +7,4 @@ description: |
   https://github.com/upenn-libraries/circleci_orb_docker_publish
 
 orbs:
-  docker-publish: circleci/docker@0.5.13
+  docker: circleci/docker@0.5.13

@@ -4,9 +4,9 @@ executor: << parameters.executor >>
 
 parameters:
   executor:
-    description: Image to use for running the Docker build. Defaults to docker-publish/docker.
+    description: Image to use for running the Docker build. Defaults to docker/docker.
     type: executor
-    default: docker-publish/docker
+    default: docker/docker
   dockerfile:
     description: Name of dockerfile to use. Defaults to Dockerfile.
     type: string
@@ -64,7 +64,7 @@ steps:
   - when:
       condition: <<parameters.deploy>>
       steps:
-        - docker-publish/check:
+        - docker/check:
             registry: << parameters.registry >>
   - when:
       name: Run before_build lifecycle hook steps.
@@ -85,6 +85,6 @@ steps:
   - when:
       condition: <<parameters.deploy>>
       steps:
-        - docker-publish/deploy:
+        - docker/push:
             registry: << parameters.registry >>
             image: << parameters.image >>
